@@ -10,31 +10,12 @@ public class MainActivity extends Activity {
 
 	String [] listContent;
 	
-	public MainActivity() {
-		listContent = new String[] {
-				"one",
-				"two",
-				"three",
-				"four",
-				"five",
-				"six",
-				"seven",
-				"eight",
-				"nine",
-				"ten",
-		};
-	}
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				R.layout.components, R.id.txtTitle, listContent);
-
-		//ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-		//		android.R.layout.simple_list_item_1, listContent);
+		YellowAdapter adapter = new YellowAdapter(this, 10);
 
 		ListView listView = (ListView) findViewById(R.id.listView1);
 		listView.setAdapter(adapter);

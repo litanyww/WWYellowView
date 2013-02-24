@@ -3,7 +3,7 @@ import android.database.DataSetObserver;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
+import android.widget.ListAdapter;
 import android.content.Context;
 import android.app.Activity;
 
@@ -15,7 +15,7 @@ import android.app.Activity;
  * @author willw
  *
  */
-public class YellowAdapter implements Adapter {
+public class YellowAdapter implements ListAdapter {
 
 	int m_count;
 	Context m_context;
@@ -23,6 +23,16 @@ public class YellowAdapter implements Adapter {
 	{
 		this.m_count = count;
 		this.m_context = activity;
+	}
+	
+	public boolean isEnabled(int item)
+	{
+		return true;
+	}
+	
+	public boolean areAllItemsEnabled()
+	{
+		return false;
 	}
 	
 	/* (non-Javadoc)
