@@ -21,7 +21,7 @@ public class YellowTextView extends TextView {
 		super(context);
 		m_paint = new Paint();
 		m_paint.setStrokeWidth(2);
-		m_paint.setARGB(0xff, 0xff, 0, 0xff);
+		m_paint.setARGB(0xff, 0xff, 0xff, 0);
 	}
 	
 	protected void onDraw(Canvas canvas) {
@@ -30,7 +30,7 @@ public class YellowTextView extends TextView {
 		int height = getHeight();
 		
 		// and now, draw a nice yellow line across our view.
-		canvas.drawLine((float)0, (float)0, (float)width, (float)height, m_paint);
+		canvas.drawLine((float)0, (float)height, (float)width, (float)0, m_paint);
 	}
 	
 	
