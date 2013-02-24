@@ -89,6 +89,7 @@ public class YellowAdapter implements ListAdapter {
 		else
 		{
 			yellow = new YellowTextView(m_context);
+			yellow.setTextSize(22);
 		}
 		yellow.setText((String)getItem(position));
 		return yellow;
@@ -145,9 +146,9 @@ public class YellowAdapter implements ListAdapter {
 		{
 			return "";
 		}
-		else if (number < low.length)
+		else if (number <= low.length)
 		{
-			return low[number];
+			return low[number - 1];
 		}
 		if (number < 30)
 		{
