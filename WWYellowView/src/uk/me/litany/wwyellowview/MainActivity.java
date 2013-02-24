@@ -32,7 +32,10 @@ public class MainActivity extends Activity {
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				R.layout.components, R.id.txtTitle, listContent);
-		
+
+		//ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+		//		android.R.layout.simple_list_item_1, listContent);
+
 		ListView listView = (ListView) findViewById(R.id.listView1);
 		listView.setAdapter(adapter);
 	}
