@@ -182,25 +182,35 @@ public class YellowAdapter implements ListAdapter {
 		{
 			return "ninty " + numberAsText(number - 90);
 		}
+		if (number < 1000)
+		{
+			String top = numberAsText(number / 100) + " hundred";
+			String remainder = numberAsText(number % 100);
+			if (remainder != "")
+			{
+				return top + " and " + remainder;
+			}
+			return top;
+		}
 		if (number < 100000)
 		{
-			String hundreds = numberAsText(number / 1000) + " hundred";
+			String top = numberAsText(number / 1000) + " thousand";
 			String remainder = numberAsText(number % 1000);
 			if (remainder != "")
 			{
-				return hundreds + " and " + remainder;
+				return top + " and " + remainder;
 			}
-			return hundreds;
+			return top;
 		}
 		if (number < 100000000)
 		{
-			String millions = numberAsText(number / 1000000) + " million";
+			String top = numberAsText(number / 1000000) + " million";
 			String remainder = numberAsText(number % 1000000);
 			if (remainder != "")
 			{
-				return millions + " and " + remainder;
+				return top + " and " + remainder;
 			}
-			return millions;
+			return top;
 		}
 		return Integer.toString(number);
 	}
