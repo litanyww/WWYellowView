@@ -1,4 +1,7 @@
 package uk.me.litany.wwyellowview;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.database.DataSetObserver;
 
 import android.view.View;
@@ -19,10 +22,12 @@ public class YellowAdapter implements ListAdapter {
 
 	int m_count;
 	Context m_context;
+	List<DataSetObserver> m_observers;
 	public YellowAdapter(Activity activity, int count)
 	{
 		this.m_count = count;
 		this.m_context = activity;
+		this.m_observers = new ArrayList<DataSetObserver>();
 	}
 	
 	/* (non-Javadoc)
@@ -127,7 +132,14 @@ public class YellowAdapter implements ListAdapter {
 	 */
 	@Override
 	public void registerDataSetObserver(DataSetObserver observer) {
-		// do nothing because our data never changes
+		for (DataSetObserver ob : m_observers)
+		{
+			if (ob == observer)
+			{
+				return;
+			}
+		}
+		m_observers.add(observer);
 	}
 
 	/* (non-Javadoc)
@@ -135,9 +147,17 @@ public class YellowAdapter implements ListAdapter {
 	 */
 	@Override
 	public void unregisterDataSetObserver(DataSetObserver observer) {
-		// do nothing because we never recorded the observer
+		m_observers.remove(observer);
 	}
-	
+
+	private void notifyObservers()
+	{
+		for (DataSetObserver observer : m_observers)
+		{
+			observer.onChanged();
+		}
+	}
+
 	public String numberAsText(int number) {
 		String[] low = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
 				"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
