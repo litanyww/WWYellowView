@@ -97,6 +97,13 @@ public class YellowAdapter implements ListAdapter {
 			yellow.setTextSize(22);
 		}
 		yellow.setText((String)getItem(position));
+
+		if (position > m_count - 1)
+		{
+			m_count += 10;
+			notifyObservers();
+		}
+
 		return yellow;
 	}
 
