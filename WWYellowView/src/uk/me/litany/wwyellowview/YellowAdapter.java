@@ -57,7 +57,7 @@ public class YellowAdapter implements ListAdapter {
 	 */
 	@Override
 	public Object getItem(int position) {
-		return numberAsText(position);
+		return numberAsText(position + 1);
 	}
 
 	/* (non-Javadoc)
