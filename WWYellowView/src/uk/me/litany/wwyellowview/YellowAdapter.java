@@ -25,11 +25,19 @@ public class YellowAdapter implements ListAdapter {
 		this.m_context = activity;
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.widget.ListAdapter#isEnabled(int)
+	 */
+	@Override
 	public boolean isEnabled(int item)
 	{
 		return true;
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.widget.ListAdapter#areAllItemsEnabled()
+	 */
+	@Override
 	public boolean areAllItemsEnabled()
 	{
 		return false;
@@ -74,7 +82,7 @@ public class YellowAdapter implements ListAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		YellowTextView yellow = null;
-		if (convertView == null)
+		if (convertView != null)
 		{
 			yellow = (YellowTextView)convertView;
 		}
