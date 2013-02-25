@@ -165,7 +165,12 @@ public class YellowAdapter implements ListAdapter {
 		}
 	}
 
+
 	public String numberAsText(int number) {
+		return numberAsText(number, false);
+	}
+
+	public String numberAsText(int number, boolean concatenate) {
 		String[] low = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
 				"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
 				"seventeen", "eighteen", "ninteen" };
@@ -173,71 +178,64 @@ public class YellowAdapter implements ListAdapter {
 		{
 			return "";
 		}
-		else if (number <= low.length)
+
+		String and = "";
+		if (concatenate)
 		{
-			return low[number - 1];
+			and = " and ";
+		}
+		if (number <= low.length)
+		{
+			return and + low[number - 1];
 		}
 		if (number < 30)
 		{
-			return "twenty " + numberAsText(number - 20);
+			return and + "twenty " + numberAsText(number - 20, false);
 		}
 		if (number < 40)
 		{
-			return "thirty " + numberAsText(number - 30);
+			return and + "thirty " + numberAsText(number - 30, false);
 		}
 		if (number < 50)
 		{
-			return "forty " + numberAsText(number - 40);
+			return and + "forty " + numberAsText(number - 40, false);
 		}
 		if (number < 60)
 		{
-			return "fifty " + numberAsText(number - 50);
+			return and + "fifty " + numberAsText(number - 50, false);
 		}
 		if (number < 70)
 		{
-			return "sixty " + numberAsText(number - 60);
+			return and + "sixty " + numberAsText(number - 60, false);
 		}
 		if (number < 80)
 		{
-			return "seventy " + numberAsText(number - 70);
+			return and + "seventy " + numberAsText(number - 70, false);
 		}
 		if (number < 90)
 		{
-			return "eighty " + numberAsText(number - 80);
+			return and + "eighty " + numberAsText(number - 80, false);
 		}
 		if (number < 100)
 		{
-			return "ninty " + numberAsText(number - 90);
+			return and + "ninty " + numberAsText(number - 90, false);
 		}
+		if (concatenate)
+		{
+			and = " ";
+		}
+
 		if (number < 1000)
 		{
-			String top = numberAsText(number / 100) + " hundred";
-			String remainder = numberAsText(number % 100);
-			if (remainder != "")
-			{
-				return top + " and " + remainder;
-			}
-			return top;
+			return and + numberAsText(number / 100) + " hundred" + numberAsText(number % 100, true);
 		}
 		if (number < 100000)
 		{
-			String top = numberAsText(number / 1000) + " thousand";
-			String remainder = numberAsText(number % 1000);
-			if (remainder != "")
-			{
-				return top + " and " + remainder;
-			}
-			return top;
+			return and + numberAsText(number / 1000) + " thousand" + numberAsText(number % 1000, true);
 		}
 		if (number < 100000000)
 		{
-			String top = numberAsText(number / 1000000) + " million";
-			String remainder = numberAsText(number % 1000000);
-			if (remainder != "")
-			{
-				return top + " and " + remainder;
-			}
-			return top;
+			return and + numberAsText(number / 1000000) + " million" + numberAsText(number % 1000000, true);
 		}
 		return Integer.toString(number);
 	}
