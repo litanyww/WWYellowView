@@ -11,7 +11,7 @@ import android.content.Context;
 import android.app.Activity;
 
 /**
- * 
+ *
  */
 
 /**
@@ -29,7 +29,7 @@ public class YellowAdapter implements ListAdapter {
 		this.m_context = activity;
 		this.m_observers = new ArrayList<DataSetObserver>();
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see android.widget.ListAdapter#isEnabled(int)
 	 */
@@ -38,7 +38,7 @@ public class YellowAdapter implements ListAdapter {
 	{
 		return true;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see android.widget.ListAdapter#areAllItemsEnabled()
 	 */
@@ -47,7 +47,7 @@ public class YellowAdapter implements ListAdapter {
 	{
 		return false;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see android.widget.Adapter#getCount()
 	 */
@@ -70,7 +70,7 @@ public class YellowAdapter implements ListAdapter {
 	 */
 	@Override
 	public long getItemId(int position) {
-		return position;
+		return position + 1;
 	}
 
 	/* (non-Javadoc)
@@ -97,6 +97,17 @@ public class YellowAdapter implements ListAdapter {
 			yellow.setTextSize(22);
 		}
 		yellow.setText((String)getItem(position));
+
+		long id = getItemId(position);
+		if (id % 10 < 2)
+		{
+			long shift = id % 10;
+			yellow.setGreyText(Integer.toString((int)(id - shift)), (int)(shift));
+		}
+		else
+		{
+			yellow.setGreyText(null, 0);
+		}
 
 		if (position >= m_count - 1)
 		{
