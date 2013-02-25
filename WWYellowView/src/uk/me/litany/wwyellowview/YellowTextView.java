@@ -66,6 +66,8 @@ public class YellowTextView extends TextView {
 			}
 			else if (m_previousWidth > 0)
 			{
+				// FIXME: This will be incorrect when the previous TextView
+				//        was short, but this one is over-sized.
 				verticalOffset = height;
 			}
 			canvas.drawText(m_greyText, (float)(width - textWidth), - ascent - (float)(verticalOffset), p);
