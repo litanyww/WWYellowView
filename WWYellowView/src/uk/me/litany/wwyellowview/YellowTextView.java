@@ -17,23 +17,28 @@ public class YellowTextView extends TextView {
 
 	static Paint m_paint = null;
 	String m_greyText;
-	int m_verticalOffset = 0;
+	float m_previousWidth = 0;
 
 	public YellowTextView(Context context) {
 		super(context);
 		this.m_greyText = null;
-		this.m_verticalOffset = 0;
+		this.m_previousWidth = 0;
 	}
 
-	public void setGreyText(String text, int verticalOffset) {
+	public void setGreyText(String text, String previousText) {
 		m_greyText = text;
-		m_verticalOffset = verticalOffset;
+		m_previousWidth = 0;
+		if (previousText != null)
+		{
+			Paint p = getPaint();
+			m_previousWidth = p.measureText(previousText);
+		}
 	}
 
 	/** Get a common grey paint object
 	 * @return an instance of Paint which paints in grey
 	 */
-	private static Paint getGreyPaint() {
+	public static Paint getGreyPaint() {
 		if (m_paint == null) {
 			m_paint = new Paint();
 			m_paint.setTextSize(100);
@@ -54,8 +59,16 @@ public class YellowTextView extends TextView {
 			Paint p = getGreyPaint();
 			float ascent = p.ascent();
 			float textWidth = p.measureText(m_greyText);
-			// p.setColor(Color.GRAY);
-			canvas.drawText(m_greyText, (float)(width - textWidth), - ascent - (float)(height * (m_verticalOffset)), p);
+			int verticalOffset = 0;
+			if (m_previousWidth > width)
+			{
+				verticalOffset = height * 2;
+			}
+			else if (m_previousWidth > 0)
+			{
+				verticalOffset = height;
+			}
+			canvas.drawText(m_greyText, (float)(width - textWidth), - ascent - (float)(verticalOffset), p);
 		}
 	}
 

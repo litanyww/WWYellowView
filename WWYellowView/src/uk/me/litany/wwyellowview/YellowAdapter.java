@@ -87,6 +87,8 @@ public class YellowAdapter implements ListAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		YellowTextView yellow = null;
+		long id = getItemId(position);
+
 		if (convertView != null)
 		{
 			yellow = (YellowTextView)convertView;
@@ -96,18 +98,21 @@ public class YellowAdapter implements ListAdapter {
 			yellow = new YellowTextView(m_context);
 			yellow.setTextSize(22);
 		}
-		yellow.setText((String)getItem(position));
 
-		long id = getItemId(position);
-		if (id % 10 < 2)
+		if (id % 10 == 0)
 		{
-			long shift = id % 10;
-			yellow.setGreyText(Integer.toString((int)(id - shift)), (int)(shift));
+			yellow.setGreyText(Integer.toString((int)(id)), null);
+		}
+		else if (id % 10 == 1)
+		{
+			yellow.setGreyText(Integer.toString((int)(id - 1)), (String)getItem(position - 1));
 		}
 		else
 		{
-			yellow.setGreyText(null, 0);
+			yellow.setGreyText(null, null);
 		}
+
+		yellow.setText((String)getItem(position));
 
 		if (position >= m_count - 1)
 		{
