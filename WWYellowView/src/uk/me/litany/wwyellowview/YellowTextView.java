@@ -62,8 +62,7 @@ public class YellowTextView extends TextView {
 			if (m_previousWidth > 0)
 			{
 				// second row to render the text.
-				// FIXME: offset needs to be the height of a normal-sized textview.
-				offset = getHeight();
+				offset = getLineHeight();
 			}
 			canvas.drawText(m_greyText, (float)(width - textWidth), - ascent - (float)(offset), p);
 		}
