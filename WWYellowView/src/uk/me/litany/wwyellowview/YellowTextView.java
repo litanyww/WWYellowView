@@ -52,27 +52,20 @@ public class YellowTextView extends TextView {
 	 * @see android.widget.TextView#onDraw(android.graphics.Canvas)
 	 */
 	protected void onDraw(Canvas canvas) {
-		int width = getWidth();
-		int height = getHeight();
 		super.onDraw(canvas);
-		if (m_greyText != null) {
+		int width = getWidth();
+		if (m_greyText != null && m_previousWidth < width) {
+			int offset = 0;
 			Paint p = getGreyPaint();
 			float ascent = p.ascent();
 			float textWidth = p.measureText(m_greyText);
-			int verticalOffset = 0;
-			if (m_previousWidth > width)
+			if (m_previousWidth > 0)
 			{
-				verticalOffset = height * 2;
+				// second row to render the text.
+				// FIXME: offset needs to be the height of a normal-sized textview.
+				offset = getHeight();
 			}
-			else if (m_previousWidth > 0)
-			{
-				// FIXME: This will be incorrect when the previous TextView
-				//        was short, but this one is over-sized.
-				verticalOffset = height;
-			}
-			canvas.drawText(m_greyText, (float)(width - textWidth), - ascent - (float)(verticalOffset), p);
+			canvas.drawText(m_greyText, (float)(width - textWidth), - ascent - (float)(offset), p);
 		}
 	}
-
-
 }
