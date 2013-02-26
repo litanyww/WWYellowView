@@ -62,7 +62,7 @@ public class YellowAdapter implements ListAdapter {
 	 */
 	@Override
 	public Object getItem(int position) {
-		return numberAsText(position + 1);
+		return numberAsText(position);
 	}
 
 	/* (non-Javadoc)
@@ -70,7 +70,7 @@ public class YellowAdapter implements ListAdapter {
 	 */
 	@Override
 	public long getItemId(int position) {
-		return position + 1;
+		return position;
 	}
 
 	/* (non-Javadoc)
@@ -183,6 +183,10 @@ public class YellowAdapter implements ListAdapter {
 
 
 	public String numberAsText(int number) {
+		if (number == 0)
+		{
+			return "zero";
+		}
 		return numberAsText(number, false);
 	}
 
