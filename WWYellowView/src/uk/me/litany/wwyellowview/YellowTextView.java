@@ -54,7 +54,7 @@ public class YellowTextView extends TextView {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		int width = getWidth();
-		if (m_greyText != null && m_previousWidth < width) {
+		if (m_greyText != null && m_previousWidth <= width) {
 			int offset = 0;
 			Paint p = getGreyPaint();
 			float ascent = p.ascent();
